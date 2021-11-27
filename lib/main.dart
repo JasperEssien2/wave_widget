@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:wave_widget/widgets/wave_widget.dart';
 
@@ -27,6 +28,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
       _buildAnimationController(3500, isPhase: true),
       _buildAnimationController(4500, isPhase: true)
     ];
+    _play();
     super.initState();
   }
 
@@ -43,6 +45,14 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
       animationController.repeat(reverse: true);
     }
     return animationController;
+  }
+
+  void _play() async {
+    AssetsAudioPlayer.newPlayer().open(
+      Audio("assets/audios/ocean_wave.mp3"),
+      autoStart: true,
+      showNotification: true,
+    );
   }
 
   @override
@@ -88,6 +98,7 @@ class _MyAppState extends State<MyApp> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+    
     for (var element in animationController) {
       element.dispose();
     }
